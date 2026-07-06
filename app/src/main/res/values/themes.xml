@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash Screen ke liye custom theme -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Splash screen ka background color (Keep Yellow) -->
+        <item name="windowSplashScreenBackground">@color/splash_bg</item>
+        <!-- Center mein jo logo/icon dikhega -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <!-- Splash screen khatam hone ke baad kaunsa theme aayega -->
+        <item name="postSplashScreenTheme">@style/Theme.Keepsake</item>
+    </style>
+
+    <style name="Theme.Keepsake" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
