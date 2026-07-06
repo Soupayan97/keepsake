@@ -20,8 +20,6 @@ import kotlinx.coroutines.withContext
 class NoteDetailViewModel(private val repository: NoteRepository) : ViewModel() {
 
     private val gson = Gson()
-
-    // --- STATE VARIABLES ---
     var currentNoteId by mutableStateOf(-1)
         private set
     var noteTitle by mutableStateOf("")
@@ -47,8 +45,6 @@ class NoteDetailViewModel(private val repository: NoteRepository) : ViewModel() 
 
     private var isDataLoaded = false
     private var isSaving = false
-
-    // --- DATA LOAD KARNE KA FUNCTION ---
     fun loadNote(noteId: Int, isListModeInitial: Boolean = false) {
         if (isDataLoaded) return
         isDataLoaded = true
@@ -108,7 +104,6 @@ class NoteDetailViewModel(private val repository: NoteRepository) : ViewModel() 
         audioPath = null
     }
 
-    // --- UPDATE FUNCTIONS ---
     fun updateTitle(title: String) {
         noteTitle = title
     }
@@ -133,7 +128,6 @@ class NoteDetailViewModel(private val repository: NoteRepository) : ViewModel() 
         isListMode = !isListMode
     }
 
-    // --- MEDIA FUNCTIONS ---
     fun addImagePath(path: String) {
         imagePaths.add(path)
     }
@@ -153,8 +147,6 @@ class NoteDetailViewModel(private val repository: NoteRepository) : ViewModel() 
     fun updateAudioPath(path: String?) {
         audioPath = path
     }
-
-    // --- CHECKLIST FUNCTIONS ---
     fun addChecklistItem(text: String) {
         val newItem =
             ChecklistItem(id = System.currentTimeMillis().toInt(), text = text, isChecked = false)
@@ -173,14 +165,11 @@ class NoteDetailViewModel(private val repository: NoteRepository) : ViewModel() 
         checklistItems.removeAll { it.id == itemId }
     }
 
-    // --- DELETE FUNCTION ---
     fun moveToTrash() {
         if (currentNoteId == -1 && noteTitle.isBlank() && noteContent.isBlank() && checklistItems.isEmpty()) return
         isTrashed = true
         saveNote()
     }
-
-    // --- SAVE FUNCTION ---
     fun saveNote() {
         if (isSaving) return
         if (noteTitle.isBlank() && noteContent.isBlank() && checklistItems.isEmpty() &&
